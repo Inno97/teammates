@@ -1,21 +1,10 @@
 package teammates.ui.webapi;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import teammates.common.datatransfer.attributes.CourseAttributes;
-import teammates.common.datatransfer.attributes.InstructorAttributes;
-import teammates.common.datatransfer.attributes.StudentAttributes;
 import teammates.common.exception.UnauthorizedAccessException;
-import teammates.common.util.Const;
-import teammates.common.util.StringHelper;
-import teammates.ui.output.InstructorData;
-import teammates.ui.output.InstructorsData;
 import teammates.ui.output.PrevMotdData;
-import teammates.ui.request.Intent;
 
 /**
- * Gets the previous Message of the Days, depending on the userInfo (Daniel)
+ * Gets the previous Message of the Days, depending on the userInfo (Daniel).
  */
 class GetPrevMotdAction extends Action {
 
@@ -46,19 +35,13 @@ class GetPrevMotdAction extends Action {
         } else if (userInfo.isInstructor) {
             userInfoType = "instructor";
         }
-        
-        // debug print statements to show that this userInfo may not be working as intended when testing
-        System.out.println("admin / student / instructor");
-        System.out.println(userInfo.isAdmin);
-        System.out.println(userInfo.isStudent);
-        System.out.println(userInfo.isInstructor);
 
-        if (userInfoType != null) {
+        if (userInfoType == null) {
+            return new JsonResult("Please Login to see Message of the Day");
+        } else {
             // use MotdData
             PrevMotdData data = new PrevMotdData(userInfoType);
             return new JsonResult(data);
-        } else {
-            return new JsonResult("Please Login to see Message of the Day");
         }
     }
 
