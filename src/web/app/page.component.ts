@@ -15,7 +15,9 @@ import { fromEvent, merge, Observable, of } from 'rxjs';
 import { mapTo } from 'rxjs/operators';
 import uaParser from 'ua-parser-js';
 import { environment } from '../environments/environment';
+import { MotdService } from '../services/motd.service';
 import { StatusMessageService } from '../services/status-message.service';
+import { Motd } from '../types/api-output';
 import { Toast } from './components/toast/toast';
 
 const DEFAULT_TITLE: string = 'TEAMMATES - Online Peer Feedback/Evaluation System for Student Team Projects';
@@ -42,6 +44,8 @@ export class PageComponent {
   @Input() hideAuthInfo: boolean = false;
   @Input() navItems: any[] = [];
   @Input() institute: string = '';
+  @Input() motdString: string = '';
+  @Input() motdHtml: string = '';
 
   isCollapsed: boolean = true;
   isUnsupportedBrowser: boolean = false;
@@ -69,7 +73,7 @@ export class PageComponent {
 
   constructor(private router: Router, private route: ActivatedRoute, private title: Title,
               private ngbModal: NgbModal, location: Location,
-              private statusMessageService: StatusMessageService) {
+              private statusMessageService: StatusMessageService, private motdService: MotdService) {
     this.checkBrowserVersion();
     this.router.events.subscribe((val: any) => {
       if (val instanceof NavigationEnd) {
@@ -104,7 +108,37 @@ export class PageComponent {
 
     this.statusMessageService.getToastEvent().subscribe((toast: Toast) => {
       this.toast = toast;
+    });    
+    
+    this.motdService.getMotd().subscribe((res: Motd) => {
+      if (res.motd) {
+        this.setMotd(res.motd, res.date);
+      }
     });
+  }
+
+  // motd
+  isMotdRead: boolean = (localStorage.getItem('isMotdRead') !== null && localStorage.getItem('isMotdRead') === 'true' ? true : false);
+  date: string = "";
+
+  private setMotd(motd: string, date: string): void {
+    if (!this.isMotdRead || motd == "") {
+      this.motdString = motd;
+      this.date = date;
+      this.motdHtml = 
+        "<h1>Message of the Day</h1>" + 
+        "<p>" + this.motdString + "</p>" + 
+        "<p>" + this.date + "</p>";
+    } else {
+      this.motdHtml = "";
+    }
+  }
+
+  hideMotd() {
+    document.getElementById('motd')!.style.visibility='hidden';
+    document.getElementById('motd')!.style.height='0px';
+    localStorage.setItem('isMotdRead', 'true');
+    console.log(localStorage.getItem('isMotdRead'));
   }
 
   private checkBrowserVersion(): void {

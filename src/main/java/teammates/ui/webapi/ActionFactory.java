@@ -118,6 +118,10 @@ public class ActionFactory {
         map(ResourceURIs.INSTRUCTOR, PUT, UpdateInstructorAction.class);
         map(ResourceURIs.INSTRUCTOR, POST, CreateInstructorAction.class);
 
+        // motd
+        map(ResourceURIs.MOTD, GET, GetMotdAction.class);
+        map(ResourceURIs.PREVMOTD, GET, GetPrevMotdAction.class);
+
         // Cron jobs; use GET request
         // Reference: https://cloud.google.com/appengine/docs/standard/java/config/cron
 

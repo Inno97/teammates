@@ -12,6 +12,7 @@ import { AuthInfo } from '../../types/api-output';
   selector: 'tm-admin-page',
   templateUrl: './admin-page.component.html',
 })
+
 export class AdminPageComponent implements OnInit {
 
   user: string = '';
@@ -19,6 +20,7 @@ export class AdminPageComponent implements OnInit {
   isInstructor: boolean = false;
   isStudent: boolean = false;
   isAdmin: boolean = false;
+
   navItems: any[] = [
     {
       url: '/web/admin',

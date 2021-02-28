@@ -110,3 +110,21 @@ nav {
   border: 1px solid rgba(255, 255, 255, .3);
   margin: .5rem 15px;
 }
+
+.motd {
+  font-size: inherit;
+  text-align: center;
+  background-color: rgb(240, 240, 240);
+}
+
+.motd h1 {
+  font-size: 2em;
+}
+
+.motd p {
+  font-size: 1.25em;
+}
+
+.motd a {
+  border-color: rgb(220, 220, 220);
+}

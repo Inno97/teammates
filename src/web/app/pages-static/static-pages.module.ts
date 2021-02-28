@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./about-page/about-page.module').then((m: any) => m.AboutPageModule),
   },
   {
+    path: 'motd',
+    loadChildren: () => import('./motd-page/motd-page.module').then((m: any) => m.MotdPageModule),
+  },
+  {
     path: 'contact',
     loadChildren: () => import('./contact-page/contact-page.module').then((m: any) => m.ContactPageModule),
   },

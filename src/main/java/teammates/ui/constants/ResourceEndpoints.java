@@ -24,6 +24,8 @@ public enum ResourceEndpoints {
     INSTRUCTORS(ResourceURIs.INSTRUCTORS),
     INSTRUCTOR(ResourceURIs.INSTRUCTOR),
     INSTRUCTOR_PRIVILEGE(ResourceURIs.INSTRUCTOR_PRIVILEGE),
+    MOTD(ResourceURIs.MOTD),
+    PREVMOTD(ResourceURIs.PREVMOTD),
     RESULT(ResourceURIs.RESULT),
     STUDENTS(ResourceURIs.STUDENTS),
     STUDENT(ResourceURIs.STUDENT),

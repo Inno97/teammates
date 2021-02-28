@@ -41,6 +41,10 @@ export class StaticPageComponent implements OnInit {
       display: 'Terms',
     },
     {
+      url: '/web/front/motd',
+      display: 'MotD',
+    },
+    {
       display: 'Help',
       children: [
         {

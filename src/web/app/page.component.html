@@ -67,6 +67,14 @@
         <i class="fas fa-ban"></i>&nbsp;You are currently not enabling cookies in your browser. TEAMMATES requires cookies in order to work effectively.
       </div>
     </div>
+    <div id="motd" *ngIf="(isStudent || isInstructor || isAdmin) && !isMotdRead">
+      <div class="motd">
+        <div #motd [innerHtml]="motdHtml">
+        </div>
+        <button (click)="hideMotd()">X</button>
+        <div><a href="/web/front/motd">Previous Message of the Day</a></div>
+      </div>
+    </div>
     <div *ngIf="!isValidUser">
       <div *ngIf="isStudent || isInstructor || isAdmin">
         <div class="row">
